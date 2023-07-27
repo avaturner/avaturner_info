@@ -11,7 +11,8 @@ export const content = {
       title: 'accomplishments'
     },
     'resume': {
-      title: 'resume'
+      title: 'resume',
+      href: 'AvaTurnerResume.pdf'
     },
   },
 
