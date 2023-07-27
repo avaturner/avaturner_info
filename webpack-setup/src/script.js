@@ -5,7 +5,14 @@ import {
 (() => {
   class demoPageGen {
     constructor(config) {
+
       const default_content = [
+        {
+          name: 'github',
+          title: 'github',
+          text: '- Click Here for Code ',
+          href: 'https://github.com/avaturner'
+        },
         {
           name: 'resume',
           title: 'Resume',
@@ -20,14 +27,11 @@ import {
           name: 'experience',
           title: 'Experience',
           text: "- Software Engineering Intern with Ziff Davis, Everyday Health Group \n \v \v -Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. \n \n - UofSC College of Engineering and Computing Career Center \n \v \v -Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. \n \n - Middletown Township Public Schools Intern \n \v \v -Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus."
-        },
-        {
-          name: '',
-          title: '',
-          text: ''
         }
       ];
-      const local_content = localStorage.getItem('local_content');
+
+      const local_content = localStorage.getItem('local_content') || [];
+
       Object.assign(this, {
         content: [
           ...default_content,
@@ -36,9 +40,13 @@ import {
         main_section: document.querySelector('main'),
         main_element: document.querySelector('main'),
         footer_object: document.querySelector('footer'),
+
       }, config);
-      
-      
+
+      localStorage.setItem('first_p', JSON.stringify(this.first_p));
+      localStorage.setItem('second_p', JSON.stringify(this.second_p));
+      localStorage.setItem('third_p', JSON.stringify(this.third_p));
+
       this.content_text = this.content;
       if (this.footer_object != null) {
         this.footer_object.insertAdjacentHTML('beforeend', content.footer);
@@ -74,18 +82,18 @@ import {
       this.event_listeners();
     }
 
-    
 
-    event_listeners() { 
-      this.changeB = document.querySelector('.add_change_button'); 
+
+    event_listeners() {
+      this.changeB = document.querySelector('.add_change_button');
       if (this.changeB != null) {
-        this.changeB.addEventListener("click", () => { 
-          this.insert_form(); 
+        this.changeB.addEventListener("click", () => {
+          this.insert_form();
         });
       }
     }
 
-    insert_form({title,note} = {}) {
+    insert_form({ title, note } = {}) {
       const new_note_container = document.createElement("div"); //whole note section
       const new_title = document.createElement("input"); //first box
       const new_note = document.createElement("textarea"); //second box
@@ -137,17 +145,27 @@ import {
 
     update_nav() {
       const nav_container = document.createElement('nav');
-      for (const key in content.nav) {
-        if (content.nav.hasOwnProperty.call(content.nav, key)) {
-          const element = content.nav[key];
-          const nav_item = document.createElement('a');
-          nav_item.href = content.nav[key].href ? content.nav[key].href : `#${key}`;
-          nav_item.target = content.nav[key].href ? '_blank' : '';
-          nav_item.classList.add(`special_nav_${key}`);
-          nav_item.innerText = content.nav[key].title;
-          nav_container.insertAdjacentElement('afterbegin', nav_item);
-        }
-      }
+
+      this.content.forEach(element => {
+        const nav_item = document.createElement('a');
+        nav_item.href = element.href ? element.href : `#${element.title}`;
+        nav_item.target = element.href ? '_blank' : '';
+        nav_item.classList.add(`special_nav_${element.title}`);
+        nav_item.innerText = element.title;
+        nav_container.insertAdjacentElement('afterbegin', nav_item);
+      });
+
+      // for (const key in content.nav) {
+      //   if (content.nav.hasOwnProperty.call(content.nav, key)) {
+      //     const element = content.nav[key];
+      //     const nav_item = document.createElement('a');
+      //     nav_item.href = content.nav[key].href ? content.nav[key].href : `#${key}`;
+      //     nav_item.target = content.nav[key].href ? '_blank' : '';
+      //     nav_item.classList.add(`special_nav_${key}`);
+      //     nav_item.innerText = content.nav[key].title;
+      //     nav_container.insertAdjacentElement('afterbegin', nav_item);
+      //   }
+      // }
       this.main_section.insertAdjacentElement('afterbegin', nav_container);
     }
 
