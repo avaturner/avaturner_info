@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap");
+
+:root {
+  --name-text-size: 55px;
+  --picture-width: 15%;
+  --main-width: 100%;
+  --nav-width: 100%;
+  --main-section-width: 100%;
+  --main-flex-direction: row-reverse;
+  --nav-flex-direction: row;
+  --nav-padding: 24px;
+}
+
+@media (max-width: 1279px) {
+  :root {
+    --nav-width: 100%;
+    --main-flex-direction: column-reverse;
+    --nav-flex-direction: row;
+    --nav-padding: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {}
+}
+
+@media (max-width: 519px) {
+  :root {
+    --nav-width: 100%;
+    --name-text-size: 20px;
+    --picture-width: 34%;
+    --main-width: 20%;
+  }
+}
+
+@font-face {
+  font-family: "minion-pro";
+  src: url("https://use.typekit.net/af/ea8d85/0000000000000000000151d1/27/l?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=n7&v=3") format("woff2"),
+    url("https://use.typekit.net/af/ea8d85/0000000000000000000151d1/27/d?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=n7&v=3") format("woff"),
+    url("https://use.typekit.net/af/ea8d85/0000000000000000000151d1/27/a?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=n7&v=3") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: BerninaSansWeb-Bold;
+  src: url("//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Bold.woff") format("woff"),
+    url("//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Bold.eot?") format("-"),
+    url("//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: BerninaSansWeb;
+  src: url("//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Regular.woff") format("woff"),
+    url("//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Regular.eot?") format("-"),
+    url("//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(0deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(108, 9, 16, 0.7987788865546218) 100%);
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: "Poppins", sans-serif;
+  color: white;
+  font-size: var(--name-text-size);
+  text-align: center;
+  margin-top: 50px;
+}
+
+#picture {
+  text-align: center;
+  padding-top: 40px;
+}
+
+#picture img {
+  box-shadow: 10px 5px 5px black;
+  width: var(--picture-width);
+  margin-top: 100px;
+}
+
+nav {
+  display: flex;
+  flex-direction: var(--nav-flex-direction);
+  row-gap: 12px;
+  column-gap: 12px;
+  max-width: var(--nav-width);
+  min-width: var(--nav-width);
+  background: #e1c9bf;
+  position: fixed;
+  border-bottom: solid 3px black;
+  z-index: 1;
+}
+
+nav>a {
+  padding: 24px;
+  display: block;
+  text-decoration: none;
+  width: 100%;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  color: black;
+}
+
+nav>a:hover {
+  background: #ffffff99;
+  color: rgba(108, 9, 16, 0.7987788865546218);
+  margin-inline-end: 5px;
+  margin-block-end: 5px;
+  margin: 0 auto;
+}
+
+footer {
+  text-align: center;
+  padding: 24px;
+}
+
+footer>a {
+  color: #e1c9bf;
+  font-family: "Poppins", sans-serif;
+  font-size: 25px;
+  padding: 30px;
+}
+
+footer>a:hover {
+  color: rgba(108, 9, 16, 0.7987788865546218);
+}
+
+section.section {
+  line-height: 40px;
+  padding-inline: 70px;
+}
+
+.form_page_button > a{
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  top: 40px;
+  display: flex;
+  justify-content: center;
+  color:white;
+  font-size: 30px;
+}
+
+.add_change_button {
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  top: 40px;
+  display: flex;
+  justify-content: center;
+  color:white;
+  font-size: 30px;
+}
+
+section>a {
+  position: relative;
+  top: -60px;
+}
+
+div.title {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-size: 32px;
+  line-height: 40px;
+  padding-block-start: 42px;
+  font-weight: 700;
+  text-align: left;
+  position: relative;
+  display: inline-block;
+  width: auto;
+}
+
+div.title::before {
+  content: "";
+  border-top: solid 1px #fff;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+div.deck {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-size: 25px;
+  line-height: 40px;
+  text-align: left;
+}
+
+/* main{
+} */

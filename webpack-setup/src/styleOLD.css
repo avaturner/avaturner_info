@@ -1,0 +1,146 @@
+:root {
+    --nav-width:300px;
+    --main-section-width:600px;
+    --main-flex-direction:row-reverse;
+    --nav-flex-direction:column;
+    --nav-padding: 24px;
+}
+@media (max-width: 1279px) {
+    :root {
+        --nav-width:auto;
+        --main-flex-direction:column-reverse;
+        --nav-flex-direction:row;
+        --nav-padding: 14px;
+    }
+}
+@media (max-width: 979px) {
+  :root {
+
+  }
+}
+@media (max-width: 767px) {
+  :root {
+  }
+}
+@media (max-width: 519px) {
+  :root {
+    
+  }
+}
+
+@font-face {
+    font-family:"minion-pro";
+    src:url("https://use.typekit.net/af/ea8d85/0000000000000000000151d1/27/l?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/ea8d85/0000000000000000000151d1/27/d?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/ea8d85/0000000000000000000151d1/27/a?primer=7fa3915bdafdf03041871920a205bef951d72bf64dd4c4460fb992e3ecc3a862&fvd=n7&v=3") format("opentype");
+    font-display:swap;font-style:normal;font-weight:700;font-stretch:normal;
+}
+
+@font-face {
+    font-family: BerninaSansWeb-Bold;
+    src: url('//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Bold.woff') format('woff'),
+      url('//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Bold.eot?') format('-'),
+      url('//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Bold.ttf') format('truetype');
+}
+  
+@font-face {
+    font-family: BerninaSansWeb;
+    src: url('//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Regular.woff') format('woff'),
+      url('//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Regular.eot?') format('-'),
+      url('//clf1.medpagetoday.net/assets/fonts/BerninaSans-Web-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+
+body{
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.5480786064425771) 52%, rgba(0,212,255,1) 100%);
+}
+
+body > div{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+p{
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    position:relative;
+    color: white;
+}
+
+main section >p::before{
+    content:"";
+    position:absolute;
+    display:block;
+    width:100%;
+    border-top:solid 1px black;
+    top:-10px;
+}
+
+#picture{
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom:40px;
+}
+
+#picture img{
+    box-shadow: 10px 5px 5px black;
+    width:100%;
+}
+
+body h1{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline: 25px;
+    font-family: "BerninaSansWeb-bold", Arial, Helvetica, sans-serif;
+}
+
+main{
+    display:flex;
+    flex-direction:var(--main-flex-direction);
+    column-gap:24px;
+    row-gap:24px;
+    font: 1rem/1.5rem minion-pro, 'Times New Roman', serif;
+    justify-content: center;
+    align-items: center;
+}
+
+main > section{
+    width:var(--main-section-width);
+}
+
+body{
+    display:flex;
+    flex-direction:column;
+    row-gap:24px;
+}
+
+nav{
+    display:flex;
+    flex-direction:var(--nav-flex-direction);
+    row-gap:12px;
+    column-gap:12px;
+    max-width:var(--nav-width);
+    min-width: var(--nav-width);
+}
+
+nav > a{
+    padding: var(--nav-padding);
+    background:#ffffff66;
+    display: block;
+    border-radius: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align:center;
+    font-family: "BerninaSansWeb-bold", Arial, Helvetica, sans-serif;
+}
+
+nav > a:hover{
+    background:#ffffff99;
+    color:white;
+    margin-inline-end: 5px;
+    margin-block-end: 5px;
+}
+
