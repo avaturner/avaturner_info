@@ -199,6 +199,69 @@ div.deck {
   line-height: 40px;
   text-align: left;
 }
+.add_changes{
+  background-color: #fff;
+  max-width: 90%;
+  margin-inline: auto;
+  padding: 24px;
+}
+.note_container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  position: relative;
+}
 
-/* main{
-} */
+.add_changes .save_button{
+  background-color: darkblue;
+  color: white;
+  padding: 12px;
+  width: 100px;
+  text-align: center;
+  border-radius: 4px;
+  margin-inline: auto;
+}
+.delete_button{
+  background-color: darkred;
+  padding: 12px;
+  width: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete_button:before{
+  content: 'X';
+  color: #fff;
+}
+.new_title > input, .new_note_area_container > textarea, .new_name > input{
+  width: 100%;
+}
+.new_title, .new_note_area_container, .new_name{
+  position: relative;
+}
+.new_title:before{
+  content: 'title';
+  position: absolute;
+  color: #000;
+  top: -20px
+}
+
+.new_name:before{
+  content: 'name';
+  position: absolute;
+  color: #000;
+  top: -20px
+}
+
+.new_note_area_container:before{
+  content: 'description';
+  position: absolute;
+  color: #000;
+  top: -20px
+}
+
+.pulldown_menu_container{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
