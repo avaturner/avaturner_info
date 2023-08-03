@@ -45,8 +45,6 @@ import {
 
       }, config);
 
-      console.warn('>> local_storage_content: ', this.content);
-
       this.content_text = this.content;
       if (this.footer_object != null) {
         this.footer_object.insertAdjacentHTML('beforeend', content.footer);
@@ -82,7 +80,6 @@ import {
 
       }
       else if (this.main_section != null && this.edit_mode) {
-        console.warn('>> this.main_section: ', this.main_section);
         this.insert_form();
         this.content_pulldown_gen();
         this.event_listeners();
@@ -96,10 +93,15 @@ import {
       this.save_button = document.querySelector('.save_button');
       if (this.save_button != null) {
         this.save_button.addEventListener("click", (e) => {
-          this.content[this.selected_index] = { title: this.new_title.value, name: this.new_name.value, text: this.new_note_area.value }
-          console.warn('>> selected_index <<', this.content[this.selected_index]);
+
+          if (this.selected_index) {
+            this.content[this.selected_index] = { title: this.new_title.value, name: this.new_name.value.toLowerCase().trim().replace(new RegExp(/\s/, 'g'), '_'), text: this.new_note_area.value }
+          } else {
+            this.content.push({ title: this.new_title.value, name: this.new_name.value.toLowerCase().trim().replace(new RegExp(/\s/, 'g'), '_'), text: this.new_note_area.value })
+          }
+
           localStorage.setItem('local_content', JSON.stringify(this.content));
-          console.warn("UPDATED SAVE CONTENT", this.content);
+          window.location.reload();
         });
       }
 
@@ -118,8 +120,18 @@ import {
         const element = this.content[index];
         this.pulldown_menu.insertAdjacentHTML('beforeend', `<option value="${index}" data-id="${index}">${element.title}</option>`)
       }
+
+      this.pulldown_menu.insertAdjacentHTML('beforeend', `<option value='new'>NEW</option>`)
+
       this.pulldown_menu.addEventListener('change', (e) => {
-        console.warn('pulldown element: ', this.pulldown_menu[e.target.selectedIndex].dataset.id);
+        if (e.target.value == 'new') {
+          this.selected_index = null;
+          this.new_title.value = '';
+          this.new_note_area.value = '';
+          this.new_name.value = '';
+          return;
+        }
+
         const selected_option = this.content[e.target.value];
         this.new_title.value = selected_option.title;
         this.new_note_area.value = selected_option.text;
@@ -132,7 +144,6 @@ import {
     }
 
     insert_form({ title, note } = {}) {
-      console.warn('>> insert_form <<');
       this.note_id = 1;
       this.new_note_container = document.createElement("div");
       this.new_note_container.classList.add('note_container');
