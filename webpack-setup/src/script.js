@@ -10,13 +10,13 @@ import {
         {
           name: 'github',
           title: 'github',
-          text: '- Click Here for Code ',
+          text: 'click here for github ',
           href: 'https://github.com/avaturner'
         },
         {
           name: 'resume',
           title: 'Resume',
-          text: '- Click Here for my Resume ',
+          text: 'click here for my resume ',
           href: 'AvaTurnerResume.pdf'
         },
         {
@@ -33,11 +33,6 @@ import {
 
       const local_storage_content = JSON.parse(localStorage.getItem('local_content')) || [];
 
-      // const local_storage_content = JSON.parse(localStorage.getItem('local_content'));
-
-
-
-
       this.edit_mode = /changes_form/.test(document.location.pathname);
 
       Object.assign(this, {
@@ -50,11 +45,7 @@ import {
 
       }, config);
 
-
       console.warn('>> local_storage_content: ', this.content);
-      // localStorage.setItem('first_p', JSON.stringify(this.first_p));
-      // localStorage.setItem('second_p', JSON.stringify(this.second_p));
-      // localStorage.setItem('third_p', JSON.stringify(this.third_p));
 
       this.content_text = this.content;
       if (this.footer_object != null) {
@@ -63,7 +54,9 @@ import {
     }
 
     init() {
-      this.update_nav();
+      if (!/changes_form/.test(document.location.pathname)){
+        this.update_nav();
+      }
       if (this.main_section != null && !this.edit_mode) {
         this.content_text.forEach(section => {
           if (section.href) {
@@ -103,21 +96,20 @@ import {
       this.save_button = document.querySelector('.save_button');
       if (this.save_button != null) {
         this.save_button.addEventListener("click", (e) => {
-
           this.content[this.selected_index] = { title: this.new_title.value, name: this.new_name.value, text: this.new_note_area.value }
           console.warn('>> selected_index <<', this.content[this.selected_index]);
           localStorage.setItem('local_content', JSON.stringify(this.content));
+          console.warn("UPDATED SAVE CONTENT", this.content);
         });
       }
-
+      
       this.new_delete_button.addEventListener("click", (e) => {
         console.warn('>> Click Delete <<');
-        //same as above, just deleted from local storage, calls method
-        // const _id = e.target.dataset.id;
-        // this.delete_notes({
-        //   id: _id,
-        //   element: e.target
-        // });
+        const x = this.content.splice(this.selected_index,this.selected_index);
+        localStorage.setItem('local_content', JSON.stringify(this.content));
+        console.warn("CONST X", x);
+        console.warn("UPDATED DELTETE CONTENT", this.content)
+        this.update_nav();
       })
     }
 
@@ -145,28 +137,27 @@ import {
     insert_form({ title, note } = {}) {
       console.warn('>> insert_form <<');
       this.note_id = 1;
-      this.new_note_container = document.createElement("div"); //whole note section
+      this.new_note_container = document.createElement("div"); 
       this.new_note_container.classList.add('note_container');
-      this.new_title = document.createElement("input"); //first box
-      this.new_name = document.createElement("input"); //first box
-      const new_title_container = document.createElement("div"); //first box
+      this.new_title = document.createElement("input"); 
+      this.new_name = document.createElement("input"); 
+      const new_title_container = document.createElement("div"); 
       const new_name_container = document.createElement("div");
-      this.new_note_area = document.createElement("textarea"); //second box
-      this.new_note_area_container = document.createElement("div"); //second box
+      this.new_note_area = document.createElement("textarea"); 
+      this.new_note_area_container = document.createElement("div"); 
       this.new_note_area_container.classList.add('new_note_area_container');
-      const new_save_button = document.createElement("div"); //save button
-      this.new_delete_button = document.createElement("div"); //delete button
-      this.new_delete_button.classList.add("delete_button"); //explain classList?
+      const new_save_button = document.createElement("div"); 
+      this.new_delete_button = document.createElement("div"); 
+      this.new_delete_button.classList.add("delete_button"); 
       new_save_button.classList.add("save_button");
-      new_save_button.dataset.id = this.note_id; //gives each note an ID
-      new_save_button.innerText = "save";
+      new_save_button.dataset.id = this.note_id; 
+      new_save_button.innerText = "SAVE";
       this.new_title.type = "text";
       this.new_name.type = "text";
       new_title_container.classList.add('new_title');
       new_name_container.classList.add('new_name');
       this.new_note_area.dataset.id = this.note_id;
       this.new_delete_button.dataset.id = this.note_id;
-      //buttons build bottom up, inserted onto page
       this.new_note_container.insertAdjacentElement("afterbegin", new_save_button);
       this.new_note_area_container.insertAdjacentElement("afterbegin", this.new_note_area);
       this.new_note_container.insertAdjacentElement("afterbegin", this.new_note_area_container);
@@ -188,29 +179,20 @@ import {
     }
 
     update_nav() {
-      const nav_container = document.createElement('nav');
+      if (!/changes_form/.test(document.location.pathname)){
 
-      this.content.forEach(element => {
-        const nav_item = document.createElement('a');
-        nav_item.href = element.href ? element.href : `#${element.name}`;
-        nav_item.target = element.href ? '_blank' : '';
-        nav_item.classList.add(`special_nav_${element.name}`);
-        nav_item.innerText = element.title;
-        nav_container.insertAdjacentElement('afterbegin', nav_item);
-      });
-
-      // for (const key in content.nav) {
-      //   if (content.nav.hasOwnProperty.call(content.nav, key)) {
-      //     const element = content.nav[key];
-      //     const nav_item = document.createElement('a');
-      //     nav_item.href = content.nav[key].href ? content.nav[key].href : `#${key}`;
-      //     nav_item.target = content.nav[key].href ? '_blank' : '';
-      //     nav_item.classList.add(`special_nav_${key}`);
-      //     nav_item.innerText = content.nav[key].title;
-      //     nav_container.insertAdjacentElement('afterbegin', nav_item);
-      //   }
-      // }
-      this.primary_section.insertAdjacentElement('afterbegin', nav_container);
+        const nav_container = document.createElement('nav');
+  
+        this.content.forEach(element => {
+          const nav_item = document.createElement('a');
+          nav_item.href = element.href ? element.href : `#${element.name}`;
+          nav_item.target = element.href ? '_blank' : '';
+          nav_item.classList.add(`special_nav_${element.name}`);
+          nav_item.innerText = element.title;
+          nav_container.insertAdjacentElement('afterbegin', nav_item);
+        });
+        this.primary_section.insertAdjacentElement('afterbegin', nav_container);
+      }
     }
 
     footer() {

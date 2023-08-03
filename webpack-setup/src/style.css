@@ -200,38 +200,61 @@ div.deck {
   text-align: left;
 }
 .add_changes{
+  font-family: "Poppins", sans-serif;
   background-color: #fff;
   max-width: 90%;
   margin-inline: auto;
   padding: 24px;
+  border-radius: 20px;
 }
 .note_container{
+  font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
   row-gap: 24px;
   position: relative;
+  line-height: 20px;
 }
 
 .add_changes .save_button{
   background-color: darkblue;
+  font-family: "Poppins", sans-serif;
   color: white;
   padding: 12px;
-  width: 100px;
+  width:80px;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 20px;
   margin-inline: auto;
+  cursor: pointer;
 }
+
+.add_changes .save_button:hover {
+  background-color:rgba(0, 0, 139, 0.420);
+}
+
 .delete_button{
   background-color: darkred;
   padding: 12px;
   width: 10px;
-  border-radius: 4px;
+  height:10px;
+  border-radius: 20px;
   cursor: pointer;
+  position: relative;
+  bottom:5px;
+}
+
+.delete_button:hover{
+  background-color:rgba(139, 0, 0, 0.420);
 }
 
 .delete_button:before{
+  font-family: "Poppins", sans-serif;
   content: 'X';
   color: #fff;
+  position: relative;
+  bottom:4px;
+  left:1px;
+
 }
 .new_title > input, .new_note_area_container > textarea, .new_name > input{
   width: 100%;
@@ -240,21 +263,21 @@ div.deck {
   position: relative;
 }
 .new_title:before{
-  content: 'title';
+  content: 'Title';
   position: absolute;
   color: #000;
   top: -20px
 }
 
 .new_name:before{
-  content: 'name';
+  content: 'Name';
   position: absolute;
   color: #000;
   top: -20px
 }
 
 .new_note_area_container:before{
-  content: 'description';
+  content: 'Description';
   position: absolute;
   color: #000;
   top: -20px
