@@ -54,7 +54,7 @@ import {
     }
 
     init() {
-      if (!/changes_form/.test(document.location.pathname)){
+      if (!/changes_form/.test(document.location.pathname)) {
         this.update_nav();
       }
       if (this.main_section != null && !this.edit_mode) {
@@ -102,14 +102,11 @@ import {
           console.warn("UPDATED SAVE CONTENT", this.content);
         });
       }
-      
+
       this.new_delete_button.addEventListener("click", (e) => {
-        console.warn('>> Click Delete <<');
-        const x = this.content.splice(this.selected_index,this.selected_index);
+        this.content = this.content.filter((el) => el.name != this.content[this.selected_index].name);
         localStorage.setItem('local_content', JSON.stringify(this.content));
-        console.warn("CONST X", x);
-        console.warn("UPDATED DELTETE CONTENT", this.content)
-        this.update_nav();
+        window.location.reload();
       })
     }
 
@@ -137,20 +134,20 @@ import {
     insert_form({ title, note } = {}) {
       console.warn('>> insert_form <<');
       this.note_id = 1;
-      this.new_note_container = document.createElement("div"); 
+      this.new_note_container = document.createElement("div");
       this.new_note_container.classList.add('note_container');
-      this.new_title = document.createElement("input"); 
-      this.new_name = document.createElement("input"); 
-      const new_title_container = document.createElement("div"); 
+      this.new_title = document.createElement("input");
+      this.new_name = document.createElement("input");
+      const new_title_container = document.createElement("div");
       const new_name_container = document.createElement("div");
-      this.new_note_area = document.createElement("textarea"); 
-      this.new_note_area_container = document.createElement("div"); 
+      this.new_note_area = document.createElement("textarea");
+      this.new_note_area_container = document.createElement("div");
       this.new_note_area_container.classList.add('new_note_area_container');
-      const new_save_button = document.createElement("div"); 
-      this.new_delete_button = document.createElement("div"); 
-      this.new_delete_button.classList.add("delete_button"); 
+      const new_save_button = document.createElement("div");
+      this.new_delete_button = document.createElement("div");
+      this.new_delete_button.classList.add("delete_button");
       new_save_button.classList.add("save_button");
-      new_save_button.dataset.id = this.note_id; 
+      new_save_button.dataset.id = this.note_id;
       new_save_button.innerText = "SAVE";
       this.new_title.type = "text";
       this.new_name.type = "text";
@@ -179,10 +176,10 @@ import {
     }
 
     update_nav() {
-      if (!/changes_form/.test(document.location.pathname)){
+      if (!/changes_form/.test(document.location.pathname)) {
 
         const nav_container = document.createElement('nav');
-  
+
         this.content.forEach(element => {
           const nav_item = document.createElement('a');
           nav_item.href = element.href ? element.href : `#${element.name}`;
